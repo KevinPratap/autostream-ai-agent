@@ -1,202 +1,602 @@
-#🚀 AutoStream AI Agent
-Agentic Social-to-Lead Conversion System using LangGraph & Gemini
+\# AutoStream AI Agent - Social-to-Lead Workflow
 
-AutoStream AI Agent is an agentic conversational system that converts natural conversations into qualified business leads for AutoStream, an AI-powered video editing SaaS.
 
-It combines LLM intelligence, Retrieval-Augmented Generation (RAG), and deterministic workflow control to simulate a real-world AI sales and onboarding assistant.
 
-##🎯 Project Overview
+A conversational AI agent built with LangGraph that converts social media conversations into qualified business leads for AutoStream, an automated video editing SaaS platform.
 
-This system implements a full agentic workflow that:
 
-Classifies user intent (casual, product inquiry, high-intent)
 
-Retrieves grounded answers using RAG
+\## 🎯 Project Overview
 
-Maintains multi-turn conversation state
 
-Collects leads step-by-step (name → email → platform)
 
-Executes tools only when all conditions are satisfied
+This project implements an intelligent agent that:
 
-This project demonstrates how modern AI agents are built using explicit state machines instead of simple prompt chaining.
+\- ✅ Classifies user intent (casual, product inquiry, high-intent)
 
-##✨ Key Capabilities
+\- ✅ Retrieves knowledge using RAG from a local knowledge base
 
-Agentic state machine using LangGraph
+\- ✅ Manages conversation state across 5-6 turns
 
-Dual system: rule-based + AI-powered
+\- ✅ Sequentially collects lead data (name → email → platform)
 
-Deterministic lead-qualification funnel
+\- ✅ Executes tool only when all data is collected
 
-Real-world SaaS sales flow simulation
 
-Production-style modular architecture
 
-##⚡ Quick Start
+\*\*Built for:\*\* ServiceHive Inflx Platform  
 
-Prerequisites
+\*\*Assignment:\*\* ML Intern - Agentic Workflow
 
-Python 3.9+
 
-Google Gemini API key
 
-Installation
+---
 
-git clone https://github.com/KevinPratap/autostream-ai-agent.git
 
-cd autostream-ai-agent
+
+\## 🚀 Quick Start
+
+
+
+\### Prerequisites
+
+\- Python 3.9+
+
+\- Google Gemini API key (free)
+
+
+
+\### Installation
+
+```bash
+
+\# Clone repository
+
+git clone <your-repo-url>
+
+cd autostream-agent
+
+
+
+\# Create virtual environment
 
 python -m venv venv
-venv\Scripts\activate
+
+venv\\Scripts\\activate.bat  # Windows
+
+\# source venv/bin/activate  # Mac/Linux
+
+
+
+\# Install dependencies
 
 pip install -r requirements.txt
 
-Create a .env file and add:
-GOOGLE_API_KEY=your_api_key_here
 
-##▶️ Run the Agent
 
-Rule-Based Version (no API required)
-python agent_gemini.py
+\# Configure API key (for AI version)
 
-AI-Powered Version (Gemini)
-python agent_gemini_ai.py
+echo GOOGLE\_API\_KEY=your-key-here > .env
 
-##🎬 Sample Conversation
+```
 
-You: tell me about pricing
 
-Agent:
-Basic – $29/month (10 videos, 720p)
-Pro – $79/month (Unlimited, 4K, AI captions)
 
-You: I want the Pro plan
+\### Run Agent
 
-Agent: Love that — what’s your name?
 
-You: Kevin
 
-Agent: What’s the best email to reach you on?
+\*\*Rule-Based Version (No API needed):\*\*
+
+```bash
+
+python agent\_gemini.py
+
+```
+
+
+
+\*\*AI-Powered Version (Requires API key):\*\*
+
+```bash
+
+python agent\_gemini\_ai.py
+
+```
+
+
+
+---
+
+
+
+\## 🎬 Demo Conversation
+
+```
+
+You: tell me about your pricing
+
+
+
+Agent: AutoStream Pricing Plans:
+
+&nbsp;      Basic Plan - $29/month: 10 videos, 720p
+
+&nbsp;      Pro Plan - $79/month: Unlimited videos, 4K, AI captions
+
+
+
+You: I want to try the Pro plan for my YouTube channel
+
+
+
+Agent: That's great to hear! To get you started, could you please share your name?
+
+
+
+You: Kevin Pratap
+
+
+
+Agent: Perfect! And what's your email address?
+
+
 
 You: kevin@example.com
 
-Agent: Which platform do you create for?
 
-You: YouTube
 
-LEAD CAPTURED SUCCESSFULLY
+============================================================
 
-##🧠 System Architecture
+🎯 LEAD CAPTURED SUCCESSFULLY!
 
-LangGraph enables explicit, debuggable, and controllable AI workflows instead of fragile prompt chains.
+============================================================
 
-Core design principles:
+Name: Kevin Pratap
 
-Explicit state graph
+Email: kevin@example.com
 
-Persistent memory
+Platform: Youtube
 
-Conditional routing
+============================================================
 
-Isolated RAG module
 
-Safe tool execution
 
-##🔁 Workflow
+Agent: 🎉 Awesome! We've captured your information, Kevin Pratap...
 
-User Input
-↓
-Intent Classification
-↓
-RAG Retrieval
-↓
-Response Generation
-↓
-State Evaluation
-→ Tool Call or Continue Chat
-↓
-State Reset
+```
 
-##📊 Dual Implementation Strategy
 
-Rule-Based Agent (agent_gemini.py)
 
-Pattern-driven intent detection
+---
 
-Fully deterministic
 
-Production-stable
 
-Cost-free inference
+\## 🏗️ Architecture
 
-AI-Powered Agent (agent_gemini_ai.py)
 
-Gemini-powered reasoning
 
-Context-aware conversations
+\### Why LangGraph?
 
-Flexible phrasing support
 
-Higher UX quality
 
-See COMPARISON.md for details.
+I chose \*\*LangGraph\*\* for its superior state management and deterministic workflow control:
 
-##📁 Project Structure
 
-autostream-ai-agent/
-agent_gemini.py
-agent_gemini_ai.py
-requirements.txt
-.env.example
-knowledge_base.json
-README.md
-COMPARISON.md
-SETUP.md
-QUICKSTART.md
 
-##🧪 Testing Coverage
+1\. \*\*Explicit State Graph\*\*: Each node (intent classification, RAG, response generation, tool execution) is clearly defined, making the workflow predictable and debuggable.
 
-Intent detection accuracy
 
-RAG grounding behavior
 
-Multi-turn memory
+2\. \*\*Persistent State\*\*: The `AgentState` maintains conversation history, intent, lead data, and knowledge context across multiple turns without relying on LLM memory.
 
-Sequential lead capture
 
-Edge-case handling
 
-Tool execution safety
+3\. \*\*Conditional Routing\*\*: Dynamic workflow routing based on state (e.g., "collect more info" vs "execute tool") enables complex conversation flows.
 
-##🌐 Deployment Concept
 
-This system can be extended using FastAPI, Redis session storage, WhatsApp Business API, and cloud deployment on AWS, GCP, or Azure.
 
-##📌 Academic & Engineering Value
+4\. \*\*RAG Integration\*\*: Knowledge retrieval is isolated in a dedicated node, making it easy to swap or enhance the retrieval mechanism.
 
-Agentic system design
 
-Finite-state workflow control
 
-Applied LLM integration
+5\. \*\*Controlled Tool Execution\*\*: The lead capture tool is only triggered when all three fields (name, email, platform) are confirmed present, preventing premature API calls.
 
-RAG system implementation
 
-SaaS automation use-case
 
-Production-style architecture
+\### System Flow
 
-##🏆 Outcome
+```
 
-This project demonstrates the ability to design controlled AI agents, integrate LLMs responsibly, and engineer real-world automation systems.
+User Message → Intent Classification → RAG Retrieval → Response Generation
 
-##👤 Author
+&nbsp;                                                              ↓
 
-Kevin Pratap Sidhu
-MBA Tech (AI), NMIMS
-GitHub: https://github.com/KevinPratap
+&nbsp;                                                   Check State Conditions
 
-⭐ Support
+&nbsp;                                                      ↙           ↘
 
-If you find this project useful, consider starring the repository.
+&nbsp;                                             Execute Tool    Return Response
+
+&nbsp;                                                  ↓
+
+&nbsp;                                             Reset State
+
+```
+
+
+
+---
+
+
+
+\## 📱 WhatsApp Deployment Strategy
+
+
+
+To integrate this agent with WhatsApp:
+
+
+
+\### Architecture
+
+
+
+1\. \*\*Webhook Server\*\* (FastAPI/Flask)
+
+&nbsp;  - HTTPS endpoint for Meta's WhatsApp Business API
+
+&nbsp;  - Message parsing and routing
+
+&nbsp;  - Webhook verification
+
+
+
+2\. \*\*Session Management\*\* (Redis/DynamoDB)
+
+&nbsp;  - Store agent state per phone number
+
+&nbsp;  - Handle concurrent users
+
+&nbsp;  - Session timeout (24h)
+
+
+
+3\. \*\*Implementation\*\*
+
+```python
+
+from fastapi import FastAPI, Request
+
+from agent\_gemini import AutoStreamAgent
+
+import redis
+
+
+
+app = FastAPI()
+
+cache = redis.Redis()
+
+
+
+@app.post("/webhook")
+
+async def handle\_message(request: Request):
+
+&nbsp;   data = await request.json()
+
+&nbsp;   phone = data\['entry']\[0]\['changes']\[0]\['value']\['messages']\[0]\['from']
+
+&nbsp;   message = data\['entry']\[0]\['changes']\[0]\['value']\['messages']\[0]\['text']\['body']
+
+&nbsp;   
+
+&nbsp;   # Load or create agent state
+
+&nbsp;   state = cache.get(f"agent:{phone}")
+
+&nbsp;   agent = AutoStreamAgent()
+
+&nbsp;   if state:
+
+&nbsp;       agent.state = json.loads(state)
+
+&nbsp;   
+
+&nbsp;   # Process message
+
+&nbsp;   response = agent.chat(message)
+
+&nbsp;   
+
+&nbsp;   # Save state
+
+&nbsp;   cache.set(f"agent:{phone}", json.dumps(agent.state), ex=86400)
+
+&nbsp;   
+
+&nbsp;   # Send response via WhatsApp API
+
+&nbsp;   send\_whatsapp\_message(phone, response)
+
+&nbsp;   
+
+&nbsp;   return {"status": "success"}
+
+```
+
+
+
+4\. \*\*Production Considerations\*\*
+
+&nbsp;  - Use Meta's official WhatsApp Business API or Twilio
+
+&nbsp;  - Implement rate limiting and message queueing
+
+&nbsp;  - Add logging and monitoring (Sentry, CloudWatch)
+
+&nbsp;  - Support media messages and quick replies
+
+
+
+---
+
+
+
+\## 📊 Two Implementation Approaches
+
+
+
+I've implemented \*\*TWO versions\*\* to demonstrate different strategies:
+
+
+
+\### Rule-Based Version (`agent\_gemini.py`)
+
+\- Pattern matching for intent classification
+
+\- Template-based responses
+
+\- ⚡ Instant, deterministic behavior
+
+\- ✅ Perfect for production reliability
+
+
+
+\### AI-Powered Version (`agent\_gemini\_ai.py`)
+
+\- Google Gemini 1.5 Flash for natural language understanding
+
+\- Dynamic, context-aware responses
+
+\- 🤖 Handles varied user phrasing
+
+\- ✅ Better user experience
+
+
+
+See \[COMPARISON.md](COMPARISON.md) for detailed analysis.
+
+
+
+---
+
+
+
+\## 📁 Project Structure
+
+```
+
+autostream-agent/
+
+├── agent\_gemini.py              # Rule-based implementation
+
+├── agent\_gemini\_ai.py           # AI-powered implementation
+
+├── requirements.txt             # Python dependencies
+
+├── .env.example                 # Environment template
+
+├── knowledge\_base.json          # RAG data (auto-generated)
+
+├── README.md                    # This file
+
+├── COMPARISON.md                # Version comparison
+
+├── SETUP.md                     # Detailed setup guide
+
+└── QUICKSTART.md                # 5-minute quick start
+
+```
+
+
+
+---
+
+
+
+\## 🧪 Testing
+
+
+
+\### Manual Testing
+
+```bash
+
+\# Test rule-based version
+
+python agent\_gemini.py
+
+
+
+\# Test conversations:
+
+\# 1. Pricing inquiry → Lead qualification → Tool execution
+
+\# 2. Feature questions → RAG retrieval
+
+\# 3. Edge cases (incomplete emails, etc.)
+
+```
+
+
+
+\### Expected Behavior
+
+
+
+1\. \*\*Intent Detection\*\*: Correctly classifies messages as casual, product\_inquiry, or high\_intent
+
+2\. \*\*RAG Retrieval\*\*: Returns pricing/policy information from knowledge base
+
+3\. \*\*State Management\*\*: Remembers context across 5-6 turns
+
+4\. \*\*Tool Execution\*\*: Calls `mock\_lead\_capture()` only when all data collected
+
+
+
+---
+
+
+
+\## 🛠️ Customization
+
+
+
+\### Update Knowledge Base
+
+
+
+Edit `agent\_gemini.py`:
+
+```python
+
+KNOWLEDGE\_BASE = {
+
+&nbsp;   "pricing": {
+
+&nbsp;       "basic": {"price": 29, "videos": 10, "resolution": "720p"},
+
+&nbsp;       "pro": {"price": 79, "videos": "Unlimited", "resolution": "4K"}
+
+&nbsp;   }
+
+}
+
+```
+
+
+
+\### Add More Platforms
+
+```python
+
+platforms = \['youtube', 'instagram', 'tiktok', 'twitter', 'facebook', 'linkedin']
+
+```
+
+
+
+---
+
+
+
+\## 📝 Requirements Met
+
+
+
+| Requirement | Status | Implementation |
+
+|------------|--------|----------------|
+
+| Intent Classification | ✅ | 3 types: casual, product\_inquiry, high\_intent |
+
+| RAG Knowledge Retrieval | ✅ | JSON knowledge base with pricing \& policies |
+
+| Tool Execution | ✅ | Sequential collection (name→email→platform) |
+
+| State Management | ✅ | LangGraph StateGraph with 5-6 turn memory |
+
+| LangGraph Framework | ✅ | 5 nodes with conditional routing |
+
+| Python 3.9+ | ✅ | Type hints, modern syntax |
+
+
+
+---
+
+
+
+\## 🎥 Demo Video
+
+
+
+\[Link to demo video]
+
+
+
+\*\*Demonstrates:\*\*
+
+\- RAG answering pricing questions
+
+\- Intent detection (product\_inquiry → high\_intent)
+
+\- Sequential lead data collection
+
+\- Tool execution with console output
+
+\- State management across turns
+
+
+
+---
+
+
+
+\## 🤝 Contributing
+
+
+
+This is an internship assignment project.
+
+
+
+---
+
+
+
+\## 📄 License
+
+
+
+MIT License
+
+
+
+---
+
+
+
+\## 👤 Author
+
+
+
+\*\*\[Your Name]\*\*  
+
+Email: \[Your Email]  
+
+GitHub: \[Your GitHub]
+
+
+
+Built for ServiceHive's Inflx Platform - ML Intern Assignment
+
+
+
+---
+
+
+
+\*\*⭐ If you found this helpful, please star the repo!\*\*
+

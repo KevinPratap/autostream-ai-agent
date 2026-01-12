@@ -1,0 +1,17 @@
+# Core Dependencies - Auto-resolve compatible versions
+langgraph
+langchain
+langchain-openai
+langchain-core
+
+# LLM Provider
+openai
+
+# Utilities
+python-dotenv
+pydantic
+typing-extensions
+
+# Alternative LLM Providers (uncomment if needed)
+# google-generativeai  # For Gemini
+# anthropic            # For Claude

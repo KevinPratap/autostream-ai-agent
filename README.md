@@ -582,11 +582,9 @@ MIT License
 
 
 
-\*\*\[Your Name]\*\*  
+\*\*\Kevin Pratap Sidhu\*\*  
 
-Email: \[Your Email]  
-
-GitHub: \[Your GitHub]
+Email: \Pratapkevin8@gmail.com 
 
 
 
